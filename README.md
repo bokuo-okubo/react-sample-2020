@@ -10,3 +10,9 @@
   - graphql
   - restful
     - hooks
+
+# DomainModel
+
+- User
+- Company
+- Shop
