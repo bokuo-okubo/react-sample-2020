@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from 'src/assets/logo.svg'
 import { Button } from 'src/components/common/Button'
+import { ItemCard } from 'src/components/common/ItemCard'
+import { VirtualizedList } from 'src/components/common/List'
+
+import contents, { ContentTypes } from './stub-contents'
 
 const App = styled.div`
   text-align: center;
@@ -13,48 +16,32 @@ const AppHeader = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
 `
-const Logo = styled.img`
-  height: 40vmin;
-  pointer-events: none;
-  @media (prefers-reduced-motion: no-preference) {
-    animation: App-logo-spin infinite 20s linear;
-  }
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-`
 
-const Link = styled.a`
-  color: #61dafb;
+const List = styled.div`
+  display: flex;
+  min-height: 80vh;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 export const Root: React.FC = () => {
   return (
     <App>
       <AppHeader className="App-header">
-        <Logo src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Link
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </Link>
-        <div>{process.env.REACT_APP_ENDPOINT_URL}</div>
+        <div>ENDPOINT_URL: {process.env.REACT_APP_ENDPOINT_URL}</div>
         <Button />
+        <VirtualizedList<ContentTypes>
+          contents={contents}
+          renderRow={({ index, data }) => (
+            <div key={'index' + index}>
+              <ItemCard title={data.title} body={data.body} />
+            </div>
+          )}
+        />
       </AppHeader>
     </App>
   )
