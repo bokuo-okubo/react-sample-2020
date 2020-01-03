@@ -18,6 +18,9 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
+        <div>
+          {process.env.REACT_APP_ENDPOINT_URL}
+        </div>
       </header>
     </div>
   );
