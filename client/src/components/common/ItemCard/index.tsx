@@ -10,19 +10,22 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345
+    maxWidth: 345,
+    // HACK:
+    marginBottom: '10px'
   },
   media: {
-    height: 140
+    height: 180
   }
 })
 
 export interface Props {
   title: string
   body: string
+  imageUrl: string
 }
 
-export const ItemCard: React.FC<Props> = ({ title, body }) => {
+export const ItemCard: React.FC<Props> = ({ title, body, imageUrl }) => {
   const classes = useStyles({})
 
   return (
@@ -30,7 +33,7 @@ export const ItemCard: React.FC<Props> = ({ title, body }) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://images.pexels.com/photos/3494648/pexels-photo-3494648.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          image={imageUrl}
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -42,14 +45,14 @@ export const ItemCard: React.FC<Props> = ({ title, body }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small" color="primary">
           Share
         </Button>
         <Button size="small" color="primary">
           Learn More
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   )
 }

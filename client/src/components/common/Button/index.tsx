@@ -4,7 +4,7 @@ import MuiButton from '@material-ui/core/Button'
 export const Button: React.FC = () => {
   return (
     <MuiButton variant="contained" color="primary">
-      Hello World
+      Create Item
     </MuiButton>
   )
 }
