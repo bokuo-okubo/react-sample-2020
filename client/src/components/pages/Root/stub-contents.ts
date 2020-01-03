@@ -1,5 +1,5 @@
 import { makeid } from 'src/utils/makeid'
-import { Props } from 'src/components/common/ItemCard'
+import { Props } from 'src/components/universal/ItemCard'
 
 export type ContentTypes = Pick<Props, 'title' | 'body' | 'imageUrl'> & {
   id: string

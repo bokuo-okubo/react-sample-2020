@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Button } from 'src/components/common/Button'
-import { ItemCard } from 'src/components/common/ItemCard'
-import { SingleLineGridList } from 'src/components/common/GridList'
+import { Button } from 'src/components/universal/Button'
+import { ItemCard } from 'src/components/universal/ItemCard'
+import { SingleLineGridList } from 'src/components/universal/GridList'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
