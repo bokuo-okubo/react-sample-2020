@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from 'src/assets/logo.svg';
-import './index.css';
+import React from 'react'
+import logo from 'src/assets/logo.svg'
+import './index.css'
 
 export const Root: React.FC = () => {
   return (
@@ -18,10 +18,8 @@ export const Root: React.FC = () => {
         >
           Learn React
         </a>
-        <div>
-          {process.env.REACT_APP_ENDPOINT_URL}
-        </div>
+        <div>{process.env.REACT_APP_ENDPOINT_URL}</div>
       </header>
     </div>
-  );
+  )
 }
