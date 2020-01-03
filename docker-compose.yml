@@ -1,5 +1,18 @@
 version: '3.7'
 services:
+  api:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile.develop
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./server:/usr/app
+    environment:
+      - TZ=Asia/Tokyo
+      - MONGO_URL=mongodb://react-user:passw0rd@mongo:27017/react-sample
+    ports:
+      - '3000:3000'
   mongo:
     image: mongo
     restart: always

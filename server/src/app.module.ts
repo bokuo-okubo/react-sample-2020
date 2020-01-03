@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
 
 // tmp
-const MONGO_URL = 'mongodb://react-user:passw0rd@localhost:27017/react-sample';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://react-user:passw0rd@localhost:27017/react-sample';
 
 @Module({
   imports: [
