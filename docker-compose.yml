@@ -1,16 +1,13 @@
 version: '3.7'
-
 services:
-  mongodb:
-    image: mongo:4.2
+  mongo:
+    image: mongo
     restart: always
     environment:
+      MONGO_INITDB_DATABASE: react-sample
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_ROOT_PASSWORD: example
     ports:
-      - "27017:27017"
+      - 27017:27017
     volumes:
-      - "mongodb:/data/db"
-
-volumes:
-  mongodb:
+      - ./docker_configs/db/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
