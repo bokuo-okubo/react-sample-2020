@@ -1,0 +1,19 @@
+overwrite: true
+generates:
+  ./src/gql.gen.tsx:
+    schema:
+      - ../server/schema.gql
+    documents: ./src/**/*.graphql
+    plugins:
+      - add: // tslint:disable
+      - time
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+      - typescript-resolvers
+    config:
+      noNamespaces: true
+      withHOC: true
+      withComponent: false
+      withHooks: true
+      withMutationFn: true
