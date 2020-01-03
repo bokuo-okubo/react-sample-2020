@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from 'src/assets/logo.svg'
+import { Button } from 'src/components/common/Button'
 import './index.css'
 
 export const Root: React.FC = () => {
@@ -19,6 +20,7 @@ export const Root: React.FC = () => {
           Learn React
         </a>
         <div>{process.env.REACT_APP_ENDPOINT_URL}</div>
+        <Button />
       </header>
     </div>
   )
