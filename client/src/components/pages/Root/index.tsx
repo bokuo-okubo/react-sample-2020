@@ -1,14 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Button } from 'src/components/universal/Button'
-import { ItemCard } from 'src/components/universal/ItemCard'
-import { SingleLineGridList } from 'src/components/universal/GridList'
+import { ItemList } from 'src/components/domain/ItemList'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
-
-import contents, { ContentTypes } from './stub-contents'
-import { useRootQuery, ItemType } from 'src/gql.gen'
 
 const baseWrapperCss = css`
   display: flex;
@@ -32,11 +28,6 @@ const Area = styled.div`
 `
 
 export const Root: React.FC = () => {
-  const { loading, error, data: remoteData } = useRootQuery()
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
   return (
     <>
       <CssBaseline />
@@ -45,16 +36,7 @@ export const Root: React.FC = () => {
           <Button />
         </Area>
         <Area>
-          <SingleLineGridList<ItemType>
-            contents={remoteData ? remoteData.items : []}
-            renderRow={({ data }) => (
-              <ItemCard
-                title={data.title}
-                body={data.description}
-                imageUrl={data.imageUrl}
-              />
-            )}
-          />
+          <ItemList />
         </Area>
       </StyledContainer>
     </>

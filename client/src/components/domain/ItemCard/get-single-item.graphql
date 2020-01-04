@@ -1,0 +1,9 @@
+query GetSingleItem($id: String!) {
+  item(id: $id){
+    id
+    title
+    price
+    description
+    imageUrl
+  }
+}

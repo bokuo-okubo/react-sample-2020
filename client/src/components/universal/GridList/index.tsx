@@ -13,10 +13,11 @@ const useStyles = makeStyles(theme => ({
   gridList: {
     justifyContent: 'space-around',
     width: 400,
-    minHeight: 800,
-    height: 1000,
+    minHeight: 400,
+    maxHeight: 800,
     transform: 'translateZ(0)',
-    padding: '10px'
+    padding: '10px',
+    marginBottom: '20px'
   }
 }))
 
