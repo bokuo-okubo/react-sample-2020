@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-window": "^1.8.1",
     "apollo-boost": "^0.4.7",
+    "dayjs": "^1.8.18",
     "graphql": "^14.5.8",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

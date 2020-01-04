@@ -2,10 +2,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-// import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
-// import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
@@ -20,12 +18,20 @@ const useStyles = makeStyles({
 })
 
 export interface Props {
-  title: string | undefined
-  body: string | undefined
-  imageUrl: string | undefined
+  title?: string | undefined
+  desc?: string | undefined
+  imageUrl?: string | undefined
+  updated?: string | undefined
+  price?: number | undefined
 }
 
-export const ItemCard: React.FC<Props> = ({ title, body, imageUrl }) => {
+export const ItemCard: React.FC<Props> = ({
+  title,
+  desc,
+  imageUrl,
+  price,
+  updated
+}) => {
   const classes = useStyles({})
 
   return (
@@ -41,7 +47,13 @@ export const ItemCard: React.FC<Props> = ({ title, body, imageUrl }) => {
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {body}
+            price: <b>{price}</b>
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            desc: <b>{desc}</b>
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            last updated at: <b>{updated}</b>
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ItemCard as BaseComponent } from 'src/components/universal/ItemCard'
+import { formatDate } from 'src/utils/date'
 
 import { useGetSingleItemQuery } from 'src/gql.gen'
 
@@ -16,8 +17,10 @@ export const ItemCard: React.FC<Props> = ({ id }) => {
   return (
     <BaseComponent
       title={data?.item.title}
-      body={data?.item.description}
+      desc={data?.item.description}
       imageUrl={data?.item.imageUrl}
+      price={data?.item.price}
+      updated={formatDate(data?.item.updated)}
     />
   )
 }

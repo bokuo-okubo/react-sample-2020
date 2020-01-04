@@ -1,12 +1,12 @@
 // tslint:disable
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 
-// Generated in 2020-01-04T11:42:50+09:00
+// Generated in 2020-01-04T12:54:34+09:00
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -15,7 +15,10 @@ export type Scalars = {
   Boolean: boolean,
   Int: number,
   Float: number,
+  /** Date custom scalar type */
+  Date: any,
 };
+
 
 export type ItemInput = {
   title: Scalars['String'],
@@ -31,6 +34,7 @@ export type ItemType = {
   price: Scalars['Int'],
   description: Scalars['String'],
   imageUrl: Scalars['String'],
+  updated: Scalars['Date'],
 };
 
 export type Mutation = {
@@ -93,7 +97,7 @@ export type GetSingleItemQuery = (
   { __typename?: 'Query' }
   & { item: (
     { __typename?: 'ItemType' }
-    & Pick<ItemType, 'id' | 'title' | 'price' | 'description' | 'imageUrl'>
+    & Pick<ItemType, 'id' | 'title' | 'price' | 'description' | 'imageUrl' | 'updated'>
   ) }
 );
 
@@ -104,7 +108,7 @@ export type RootQuery = (
   { __typename?: 'Query' }
   & { items: Array<(
     { __typename?: 'ItemType' }
-    & Pick<ItemType, 'id' | 'title' | 'price' | 'description' | 'imageUrl'>
+    & Pick<ItemType, 'id' | 'title' | 'price' | 'description' | 'imageUrl' | 'updated'>
   )> }
 );
 
@@ -155,6 +159,7 @@ export const GetSingleItemDocument = gql`
     price
     description
     imageUrl
+    updated
   }
 }
     `;
@@ -192,6 +197,7 @@ export const RootDocument = gql`
     price
     description
     imageUrl
+    updated
   }
 }
     `;
@@ -296,6 +302,7 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>,
   String: ResolverTypeWrapper<Scalars['String']>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
+  Date: ResolverTypeWrapper<Scalars['Date']>,
   Mutation: ResolverTypeWrapper<{}>,
   ItemInput: ItemInput,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
@@ -308,10 +315,15 @@ export type ResolversParentTypes = {
   ID: Scalars['ID'],
   String: Scalars['String'],
   Int: Scalars['Int'],
+  Date: Scalars['Date'],
   Mutation: {},
   ItemInput: ItemInput,
   Boolean: Scalars['Boolean'],
 };
+
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+  name: 'Date'
+}
 
 export type ItemTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ItemType'] = ResolversParentTypes['ItemType']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
@@ -319,6 +331,7 @@ export type ItemTypeResolvers<ContextType = any, ParentType extends ResolversPar
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  updated?: Resolver<ResolversTypes['Date'], ParentType, ContextType>,
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
@@ -334,6 +347,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type Resolvers<ContextType = any> = {
+  Date?: GraphQLScalarType,
   ItemType?: ItemTypeResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,

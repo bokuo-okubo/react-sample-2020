@@ -5,5 +5,6 @@ query GetSingleItem($id: String!) {
     price
     description
     imageUrl
+    updated
   }
 }

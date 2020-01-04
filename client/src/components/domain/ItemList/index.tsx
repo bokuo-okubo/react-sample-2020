@@ -10,10 +10,17 @@ export const ItemList: React.FC = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
 
+  const contents = remoteData
+    ? [...remoteData.items].sort((a, b) => {
+        console.log(a.updated, b.updated)
+        return b.updated - a.updated
+      })
+    : []
+
   return (
     <>
       <SingleLineGridList<ItemType>
-        contents={remoteData ? remoteData.items : []}
+        contents={contents}
         renderRow={({ data }) => <ItemCard id={data.id} />}
       />
     </>
