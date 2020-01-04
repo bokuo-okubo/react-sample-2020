@@ -1,8 +1,9 @@
-query {
+query Root {
   items {
     id
     title
     price
     description
+    imageUrl
   }
 }
