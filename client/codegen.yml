@@ -13,7 +13,7 @@ generates:
       - typescript-resolvers
     config:
       noNamespaces: true
-      withHOC: true
+      withHOC: false
       withComponent: false
       withHooks: true
       withMutationFn: true

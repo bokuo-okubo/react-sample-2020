@@ -1,10 +1,12 @@
 // tslint:disable
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
+import * as ApolloReactCommon from '@apollo/react-common';
+import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 
-// Generated in 2020-01-04T08:17:02+09:00
+// Generated in 2020-01-04T08:59:33+09:00
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -19,6 +21,7 @@ export type ItemInput = {
   title: Scalars['String'],
   price: Scalars['Int'],
   description: Scalars['String'],
+  imageUrl: Scalars['String'],
 };
 
 export type ItemType = {
@@ -27,6 +30,7 @@ export type ItemType = {
   title: Scalars['String'],
   price: Scalars['Int'],
   description: Scalars['String'],
+  imageUrl: Scalars['String'],
 };
 
 export type Mutation = {
@@ -58,18 +62,54 @@ export type Query = {
   hello: Scalars['String'],
 };
 
-export type Unnamed_1_QueryVariables = {};
+export type RootQueryVariables = {};
 
 
-export type Unnamed_1_Query = (
+export type RootQuery = (
   { __typename?: 'Query' }
   & { items: Array<(
     { __typename?: 'ItemType' }
-    & Pick<ItemType, 'id' | 'title' | 'price' | 'description'>
+    & Pick<ItemType, 'id' | 'title' | 'price' | 'description' | 'imageUrl'>
   )> }
 );
 
 
+export const RootDocument = gql`
+    query Root {
+  items {
+    id
+    title
+    price
+    description
+    imageUrl
+  }
+}
+    `;
+
+/**
+ * __useRootQuery__
+ *
+ * To run a query within a React component, call `useRootQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRootQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRootQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRootQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<RootQuery, RootQueryVariables>) {
+        return ApolloReactHooks.useQuery<RootQuery, RootQueryVariables>(RootDocument, baseOptions);
+      }
+export function useRootLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<RootQuery, RootQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<RootQuery, RootQueryVariables>(RootDocument, baseOptions);
+        }
+export type RootQueryHookResult = ReturnType<typeof useRootQuery>;
+export type RootLazyQueryHookResult = ReturnType<typeof useRootLazyQuery>;
+export type RootQueryResult = ApolloReactCommon.QueryResult<RootQuery, RootQueryVariables>;
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -168,6 +208,7 @@ export type ItemTypeResolvers<ContextType = any, ParentType extends ResolversPar
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
