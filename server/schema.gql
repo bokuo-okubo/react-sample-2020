@@ -7,6 +7,7 @@ input ItemInput {
   title: String!
   price: Int!
   description: String!
+  imageUrl: String!
 }
 
 type ItemType {
@@ -14,6 +15,7 @@ type ItemType {
   title: String!
   price: Int!
   description: String!
+  imageUrl: String!
 }
 
 type Mutation {

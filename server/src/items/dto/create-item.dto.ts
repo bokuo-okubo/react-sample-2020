@@ -10,4 +10,6 @@ export class ItemType {
   readonly price: number;
   @Field()
   readonly description: string;
+  @Field()
+  readonly imageUrl: string;
 }
