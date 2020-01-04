@@ -18,6 +18,10 @@ const useStyles = makeStyles(theme => ({
     transform: 'translateZ(0)',
     padding: '10px',
     marginBottom: '20px'
+  },
+  empty: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }))
 
@@ -28,13 +32,16 @@ interface Props<T> {
 
 export function SingleLineGridList<T>({ contents, renderRow }: Props<T>) {
   const classes = useStyles()
-
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={1} spacing={2}>
-        {contents
-          .map((content, index) => renderRow({ index, data: content }))
-          .map((elm, idx) => React.cloneElement(elm, { key: 'idx' + idx }))}
+        {contents.length > 0 ? (
+          contents
+            .map((content, index) => renderRow({ index, data: content }))
+            .map((elm, idx) => React.cloneElement(elm, { key: 'idx' + idx }))
+        ) : (
+          <div className={classes.empty}>empty!</div>
+        )}
       </GridList>
     </div>
   )

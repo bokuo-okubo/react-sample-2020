@@ -9,7 +9,7 @@ const initialStates: StateShape = {
   items: []
 }
 
-type ActionTypes = 'LOADING' | 'ERROR' | 'ADD_ITEM'
+type ActionTypes = 'START_LOADING' | 'END_LOADING' | 'ERROR' | 'ADD_ITEM'
 
 interface Action {
   type: ActionTypes
@@ -22,25 +22,24 @@ const reducer = (
 ): typeof initialStates => {
   switch (action.type) {
     case 'ADD_ITEM':
-      if (state.items.map(i => i.id).includes(action.payload?.id)) {
-        return {
-          ...state,
-          loading: false,
-          error: false
-        }
-      } else {
-        return {
-          items: [...state.items, action.payload].sort(
-            (a, b) => b.updated - a.updated
-          ),
-          loading: false,
-          error: false
-        }
+      return {
+        items: state.items.map(i => i.id).includes(action.payload?.id)
+          ? state.items
+          : [...state.items, action.payload].sort(
+              (a, b) => b.updated - a.updated
+            ),
+        loading: false,
+        error: false
       }
-    case 'LOADING':
+    case 'START_LOADING':
       return {
         ...state,
         loading: true
+      }
+    case 'END_LOADING':
+      return {
+        ...state,
+        loading: false
       }
     case 'ERROR':
       return {
@@ -54,34 +53,43 @@ const reducer = (
 
 export const ItemsContext = React.createContext<{
   state: StateShape
+  dispatch: undefined | React.Dispatch<Action>
   refetchItems: undefined | (() => Promise<void>)
-}>({ state: initialStates, refetchItems: undefined })
+}>({ state: initialStates, refetchItems: undefined, dispatch: undefined })
 
 export const ItemsContextProvider: React.FC = ({ children }) => {
-  const rq = useRootQuery()
+  const { loading, error, data, refetch } = useRootQuery()
   const [state, dispatch] = React.useReducer(reducer, initialStates)
 
   React.useEffect(() => {
-    if (rq.loading) return dispatch({ type: 'LOADING' })
-    if (rq.error) return dispatch({ type: 'ERROR' })
+    if (error) return dispatch({ type: 'ERROR' })
+    if (loading) {
+      dispatch({ type: 'START_LOADING' })
+    } else {
+      dispatch({ type: 'END_LOADING' })
+    }
 
-    return rq.data?.items.forEach(i => {
-      dispatch({ type: 'ADD_ITEM', payload: i })
+    return data?.items.forEach(i => {
+      return dispatch({ type: 'ADD_ITEM', payload: i })
     })
-  }, [rq])
+  }, [loading, error, data, state.items])
 
   const refetchItems = async () => {
-    const rf = await rq.refetch()
-    if (rf.loading) return dispatch({ type: 'LOADING' })
+    const rf = await refetch()
     if (rf.errors) return dispatch({ type: 'ERROR' })
+    if (rf.loading) {
+      dispatch({ type: 'START_LOADING' })
+    } else {
+      dispatch({ type: 'END_LOADING' })
+    }
 
     return rf.data?.items.forEach(i => {
-      dispatch({ type: 'ADD_ITEM', payload: i })
+      return dispatch({ type: 'ADD_ITEM', payload: i })
     })
   }
 
   return (
-    <ItemsContext.Provider value={{ state, refetchItems }}>
+    <ItemsContext.Provider value={{ state, refetchItems, dispatch }}>
       {children}
     </ItemsContext.Provider>
   )
