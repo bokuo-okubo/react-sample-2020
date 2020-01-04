@@ -3,6 +3,9 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""Date custom scalar type"""
+scalar Date
+
 input ItemInput {
   title: String!
   price: Int!
@@ -16,6 +19,7 @@ type ItemType {
   price: Int!
   description: String!
   imageUrl: String!
+  updated: Date!
 }
 
 type Mutation {

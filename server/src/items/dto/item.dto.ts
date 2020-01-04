@@ -12,4 +12,6 @@ export class ItemType {
   readonly description: string;
   @Field()
   readonly imageUrl: string;
+  @Field(() => Date)
+  readonly updated: Date;
 }

@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ItemsService } from './items.service';
-import { ItemType } from './dto/create-item.dto';
+import { ItemType } from './dto/item.dto';
 import { ItemInput } from './create-items.input';
 
 // result => https://gyazo.com/e5108b86ac240372b9a5e1ff64cdfda5
@@ -19,7 +19,7 @@ export class ItemsResolver {
   }
 
   @Mutation(() => ItemType)
-  async createItem(@Args('input') input: ItemInput): Promise<ItemInput> {
+  async createItem(@Args('input') input: ItemInput): Promise<ItemType> {
     return this.itemsService.create(input);
   }
 
@@ -27,12 +27,12 @@ export class ItemsResolver {
   async updateItem(
     @Args('id') id: string,
     @Args('input') input: ItemInput,
-  ): Promise<ItemInput> {
+  ): Promise<ItemType> {
     return this.itemsService.update(id, input);
   }
 
   @Mutation(() => ItemType)
-  async deleteItem(@Args('id') id: string): Promise<ItemInput> {
+  async deleteItem(@Args('id') id: string): Promise<ItemType> {
     return this.itemsService.delete(id);
   }
 

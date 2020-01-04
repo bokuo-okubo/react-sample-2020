@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ItemsService } from './items.service';
-import { ItemType } from './dto/create-item.dto';
+import { ItemType } from './dto/item.dto';
 
 @Controller('items')
 export class ItemsController {

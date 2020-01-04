@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ItemType } from './dto/create-item.dto';
+import { ItemType } from './dto/item.dto';
 import { Item } from './interfaces/item.interface';
 import { ItemInput } from './create-items.input';
 

@@ -5,4 +5,5 @@ export const ItemSchema = new mongoose.Schema({
   price: Number,
   description: String,
   imageUrl: String,
+  updated: { type: Date, default: Date.now },
 });
