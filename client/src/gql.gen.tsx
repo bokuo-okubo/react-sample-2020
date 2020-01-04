@@ -6,7 +6,7 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 
-// Generated in 2020-01-04T08:59:33+09:00
+// Generated in 2020-01-04T09:20:45+09:00
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -59,8 +59,27 @@ export type MutationDeleteItemArgs = {
 export type Query = {
    __typename?: 'Query',
   items: Array<ItemType>,
+  item: ItemType,
   hello: Scalars['String'],
 };
+
+
+export type QueryItemArgs = {
+  id: Scalars['String']
+};
+
+export type GetSingleItemQueryVariables = {
+  id: Scalars['String']
+};
+
+
+export type GetSingleItemQuery = (
+  { __typename?: 'Query' }
+  & { item: (
+    { __typename?: 'ItemType' }
+    & Pick<ItemType, 'id' | 'title' | 'price' | 'description' | 'imageUrl'>
+  ) }
+);
 
 export type RootQueryVariables = {};
 
@@ -74,6 +93,43 @@ export type RootQuery = (
 );
 
 
+export const GetSingleItemDocument = gql`
+    query GetSingleItem($id: String!) {
+  item(id: $id) {
+    id
+    title
+    price
+    description
+    imageUrl
+  }
+}
+    `;
+
+/**
+ * __useGetSingleItemQuery__
+ *
+ * To run a query within a React component, call `useGetSingleItemQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSingleItemQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSingleItemQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetSingleItemQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetSingleItemQuery, GetSingleItemQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetSingleItemQuery, GetSingleItemQueryVariables>(GetSingleItemDocument, baseOptions);
+      }
+export function useGetSingleItemLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetSingleItemQuery, GetSingleItemQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetSingleItemQuery, GetSingleItemQueryVariables>(GetSingleItemDocument, baseOptions);
+        }
+export type GetSingleItemQueryHookResult = ReturnType<typeof useGetSingleItemQuery>;
+export type GetSingleItemLazyQueryHookResult = ReturnType<typeof useGetSingleItemLazyQuery>;
+export type GetSingleItemQueryResult = ApolloReactCommon.QueryResult<GetSingleItemQuery, GetSingleItemQueryVariables>;
 export const RootDocument = gql`
     query Root {
   items {
@@ -219,6 +275,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   items?: Resolver<Array<ResolversTypes['ItemType']>, ParentType, ContextType>,
+  item?: Resolver<ResolversTypes['ItemType'], ParentType, ContextType, RequireFields<QueryItemArgs, 'id'>>,
   hello?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 };
 
