@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { CreateItemModal } from 'src/components/domain/CreateItemModal'
 import { ItemList } from 'src/components/domain/ItemList'
+import { ItemsContextProvider } from 'src/components/domain/ItemsContext'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
@@ -32,12 +33,14 @@ export const Root: React.FC = () => {
     <>
       <CssBaseline />
       <StyledContainer>
-        <Area>
-          <CreateItemModal />
-        </Area>
-        <Area>
-          <ItemList />
-        </Area>
+        <ItemsContextProvider>
+          <Area>
+            <CreateItemModal />
+          </Area>
+          <Area>
+            <ItemList />
+          </Area>
+        </ItemsContextProvider>
       </StyledContainer>
     </>
   )

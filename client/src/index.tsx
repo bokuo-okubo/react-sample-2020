@@ -4,8 +4,8 @@ import './index.css'
 import { Root } from './components/pages/Root'
 import * as serviceWorker from './serviceWorker'
 
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from '@apollo/react-hooks'
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_ENDPOINT_URL + '/graphql'
@@ -13,7 +13,7 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Root/>
+    <Root />
   </ApolloProvider>
 )
 

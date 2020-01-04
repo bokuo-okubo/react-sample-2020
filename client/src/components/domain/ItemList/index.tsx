@@ -1,26 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ItemCard } from 'src/components/domain/ItemCard'
 import { SingleLineGridList } from 'src/components/universal/GridList'
 
-import { useRootQuery, ItemType } from 'src/gql.gen'
+import { ItemType } from 'src/gql.gen'
+
+import { ItemsContext } from 'src/components/domain/ItemsContext'
 
 export const ItemList: React.FC = () => {
-  const { loading, error, data: remoteData } = useRootQuery()
+  const { state } = useContext(ItemsContext)
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
-
-  const contents = remoteData
-    ? [...remoteData.items].sort((a, b) => {
-        console.log(a.updated, b.updated)
-        return b.updated - a.updated
-      })
-    : []
+  if (state.loading) return <p>Loading...</p>
+  if (state.error) return <p>Error :(</p>
 
   return (
     <>
       <SingleLineGridList<ItemType>
-        contents={contents}
+        contents={state.items}
         renderRow={({ data }) => <ItemCard id={data.id} />}
       />
     </>
