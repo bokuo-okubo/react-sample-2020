@@ -1,0 +1,54 @@
+# for deploy
+version: '3.7'
+services:
+  client:
+    image: rs2020-clinet
+    build:
+      context: ./client
+      args:
+        - REACT_APP_ENDPOINT_URL=${REACT_APP_ENDPOINT_URL}
+        - NGINX_TAG=${NGINX_TAG}
+    depends_on:
+      - api
+      - proxy
+
+  api:
+    image: rs2020-api
+    build:
+      context: ./server
+    environment:
+      - TZ=Asia/Tokyo
+      - PORT=${API_PORT}
+      - MONGO_URL=${MONGO_URL}
+    depends_on:
+      - mongo
+      - proxy
+
+  mongo:
+    image: rs2020-mongo
+    build:
+      context: ./db
+      args:
+        - MONGO_INIT_SCRIPT=${MONGO_INIT_SCRIPT}
+        - MONGO_TAG=${MONGO_TAG}
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongovo:/data/db
+
+  proxy:
+    image: rs2020-proxy
+    build:
+      context: ./proxy
+      args:
+        - NGINX_TAG=${NGINX_TAG}
+    ports:
+        - "80:80"
+        - "443:443"
+    restart: always
+
+volumes:
+  mongovo:

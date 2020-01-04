@@ -13,7 +13,6 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    ENDPOINT_URL={process.env.REACT_APP_ENDPOINT_URL}
     <Root />
   </ApolloProvider>
 )

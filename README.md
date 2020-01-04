@@ -18,4 +18,4 @@
 
 ### locally
 1. clone this repository
-2. `cd react-sample-2020  && docker-compose up` => http://localhost:3000
+2. `cd react-sample-2020  && docker-compose up` => http://client.localhost

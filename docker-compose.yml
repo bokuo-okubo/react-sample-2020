@@ -1,21 +1,29 @@
 version: '3.7'
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
   client:
     build:
       context: ./client
-      dockerfile: ./Dockerfile.develop
+      dockerfile: dev.Dockerfile
     tty: true
     stdin_open: true
     volumes:
       - ./client:/usr/app
     environment:
-      - REACT_APP_ENDPOINT_URL=http://localhost:3001
-    ports:
-      - '3000:3000'
+      - REACT_APP_ENDPOINT_URL=http://api.localhost
+      - VIRTUAL_HOST=client.localhost
+      - VIRTUAL_PORT=3000
+    expose:
+      - 3000
   api:
     build:
       context: ./server
-      dockerfile: ./Dockerfile.develop
+      dockerfile: dev.Dockerfile
     tty: true
     stdin_open: true
     volumes:
@@ -23,17 +31,22 @@ services:
     environment:
       - TZ=Asia/Tokyo
       - MONGO_URL=mongodb://react-user:passw0rd@mongo:27017/react-sample
-    ports:
-      - '3001:3001'
+      - VIRTUAL_HOST=api.localhost
+      - VIRTUAL_PORT=3001
+    expose:
+      - 3001
   mongo:
-    image: mongo
+    build:
+      context: ./db
     restart: always
     environment:
       MONGO_INITDB_DATABASE: react-sample
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      PORT: 3001
     ports:
       - 27017:27017
     volumes:
-      - ./docker_configs/db/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongovo:/data/db
+
+volumes:
+  mongovo:
