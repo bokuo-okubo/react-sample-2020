@@ -32,7 +32,9 @@ export function SingleLineGridList<T>({ contents, renderRow }: Props<T>) {
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={1} spacing={2}>
-        {contents.map((content, index) => renderRow({ index, data: content }))}
+        {contents
+          .map((content, index) => renderRow({ index, data: content }))
+          .map((elm, idx) => React.cloneElement(elm, { key: 'idx' + idx }))}
       </GridList>
     </div>
   )

@@ -1,0 +1,20 @@
+mutation CreateItem(
+  $title: String!
+  $price: Int!
+  $description: String!
+  $imageUrl: String!
+) {
+  createItem(
+    input: {
+      title: $title
+      price: $price
+      description: $description
+      imageUrl: $imageUrl
+    }
+  ) {
+    id
+    title
+    description
+    price
+  }
+}

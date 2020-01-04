@@ -6,7 +6,7 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 
-// Generated in 2020-01-04T09:20:45+09:00
+// Generated in 2020-01-04T11:42:50+09:00
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -68,6 +68,22 @@ export type QueryItemArgs = {
   id: Scalars['String']
 };
 
+export type CreateItemMutationVariables = {
+  title: Scalars['String'],
+  price: Scalars['Int'],
+  description: Scalars['String'],
+  imageUrl: Scalars['String']
+};
+
+
+export type CreateItemMutation = (
+  { __typename?: 'Mutation' }
+  & { createItem: (
+    { __typename?: 'ItemType' }
+    & Pick<ItemType, 'id' | 'title' | 'description' | 'price'>
+  ) }
+);
+
 export type GetSingleItemQueryVariables = {
   id: Scalars['String']
 };
@@ -93,6 +109,44 @@ export type RootQuery = (
 );
 
 
+export const CreateItemDocument = gql`
+    mutation CreateItem($title: String!, $price: Int!, $description: String!, $imageUrl: String!) {
+  createItem(input: {title: $title, price: $price, description: $description, imageUrl: $imageUrl}) {
+    id
+    title
+    description
+    price
+  }
+}
+    `;
+export type CreateItemMutationFn = ApolloReactCommon.MutationFunction<CreateItemMutation, CreateItemMutationVariables>;
+
+/**
+ * __useCreateItemMutation__
+ *
+ * To run a mutation, you first call `useCreateItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createItemMutation, { data, loading, error }] = useCreateItemMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      price: // value for 'price'
+ *      description: // value for 'description'
+ *      imageUrl: // value for 'imageUrl'
+ *   },
+ * });
+ */
+export function useCreateItemMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateItemMutation, CreateItemMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateItemMutation, CreateItemMutationVariables>(CreateItemDocument, baseOptions);
+      }
+export type CreateItemMutationHookResult = ReturnType<typeof useCreateItemMutation>;
+export type CreateItemMutationResult = ApolloReactCommon.MutationResult<CreateItemMutation>;
+export type CreateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateItemMutation, CreateItemMutationVariables>;
 export const GetSingleItemDocument = gql`
     query GetSingleItem($id: String!) {
   item(id: $id) {

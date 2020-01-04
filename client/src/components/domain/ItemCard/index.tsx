@@ -14,13 +14,10 @@ export const ItemCard: React.FC<Props> = ({ id }) => {
   if (error) return <p>Error :(</p>
 
   return (
-    <>
-      <BaseComponent
-        key={id}
-        title={data?.item.title}
-        body={data?.item.description}
-        imageUrl={data?.item.imageUrl}
-      />
-    </>
+    <BaseComponent
+      title={data?.item.title}
+      body={data?.item.description}
+      imageUrl={data?.item.imageUrl}
+    />
   )
 }

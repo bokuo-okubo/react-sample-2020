@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Button } from 'src/components/universal/Button'
+import { CreateItemModal } from 'src/components/domain/CreateItemModal'
 import { ItemList } from 'src/components/domain/ItemList'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -33,7 +33,7 @@ export const Root: React.FC = () => {
       <CssBaseline />
       <StyledContainer>
         <Area>
-          <Button />
+          <CreateItemModal />
         </Area>
         <Area>
           <ItemList />
