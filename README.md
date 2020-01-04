@@ -1,18 +1,21 @@
-# my the first example of react application sample in 2020
+# react application sample
 
-# concept
+## concept
 
 - serverside
-  - nestjs
+  - nestjs w/TypeScript
+  - mongoDB
 
 - clientside
-  - reactjs
-  - graphql
-  - restful
-    - hooks
+  - react w/TypeScript
+    - mui
+    - custom hooks
+  - graphql w/ApolloClient
 
-# DomainModel
+## demo
 
-- User
-- Company
-- Shop
+...
+
+### locally
+1. clone this repository
+2. `cd react-sample-2020  && docker-compose up` => http://localhost:3000
